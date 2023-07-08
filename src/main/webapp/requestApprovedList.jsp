@@ -44,7 +44,7 @@
       </ul>
       <div class="d-lg-flex col-lg-3 justify-content-lg-end">
         <a href="index.jsp">
-          <button class="btn btn-danger">Logout!</button>
+          <button class="btn btn-danger">Logout</button>
         </a>
       </div>
     </div>
