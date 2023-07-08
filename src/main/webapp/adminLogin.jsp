@@ -62,12 +62,12 @@
       <%
         }
       %>
-      <form action="adminLoginAction.jsp" method="post">
+      <form action="${pageContext.request.contextPath}/loginAction" method="post">
         <label class="form-label">Username: </label>
         <input name="username" class="form-control form-control-lg" type="text" aria-label="form-control-lg example"><br>
 
         <label class="form-label">Password: </label>
-        <input name="password" class="form-control form-control-lg" type="text" aria-label="form-control-lg example"><br>
+        <input name="password" class="form-control form-control-lg" type="password" aria-label="form-control-lg example"><br>
 
         <div class="d-grid col-8 mx-auto">
           <button class="btn btn-danger" type="submit">LOGIN</button>

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="project.ConnectionProvider" %>
+<%@ page import="dao.ConnectionProvider" %>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,10 +35,10 @@
           <a class="nav-link" href="manageStock.jsp">Stocks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="requestForBlood.jsp">Requests</a>
+          <a class="nav-link" href="bloodRequestList.jsp">Requests</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="requstCompleted.jsp">Completed</a>
+          <a class="nav-link" href="requestApprovedList.jsp">Completed</a>
         </li>
 
       </ul>
@@ -127,7 +127,7 @@
         <td>
           <a href="updateDonor.jsp?id=<%=rs.getString(1)%>">Edit</a>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="deleteDonor.jsp?id=<%=rs.getString(1)%>">Delete</a>
+          <a href="${pageContext.request.contextPath}/deleteDonorAction?id=<%=rs.getString(1)%>">Delete</a>
         </td>
       </tr>
       <%

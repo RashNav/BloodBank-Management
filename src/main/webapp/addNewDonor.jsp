@@ -1,5 +1,5 @@
 <%@ page import="java.sql.Connection" %>
-<%@ page import="project.ConnectionProvider" %>
+<%@ page import="dao.ConnectionProvider" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -37,10 +37,10 @@
           <a class="nav-link" href="manageStock.jsp">Stocks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="requestForBlood.jsp">Requests</a>
+          <a class="nav-link" href="bloodRequestList.jsp">Requests</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="requstCompleted.jsp">Completed</a>
+          <a class="nav-link" href="requestApprovedList.jsp">Completed</a>
         </li>
 
       </ul>
@@ -68,18 +68,16 @@
           id = rs.getInt(1);
           id = id + 1;
         }%>
-        <h4>Donor ID: <%=id%></h4>
-        <%
+    <h4>Donor ID: <%=id%></h4>
+    <%
       }
-      catch (Exception e){
-
-      }
+      catch (Exception ignored){}
     %>
     <%
       String msg = request.getParameter("msg");
       if ("valid".equals(msg)){
     %>
-    <div style="text-align: center;">Successfully Updated!</div>
+    <div style="text-align: center;">Successfully Added!</div>
     <%
       }
     %>
@@ -101,7 +99,7 @@
     <div class="col-9">
 
 
-      <form action="addNewDonorAction.jsp" class="row g-3">
+      <form action="${pageContext.request.contextPath}/addNewDonorAction" class="row g-3">
         <input type="hidden" class="form-control form-control-lg" name="id" value="<%=id%>">
         <div class="col-md-6">
           <label class="form-label">Name</label>
@@ -109,7 +107,7 @@
         </div>
         <div class="col-md-6">
           <label class="form-label">Mobile</label>
-          <input type="number" class="form-control form-control-lg" name="mobilenumber">
+          <input type="number" class="form-control form-control-lg" name="mobileNumber">
         </div>
         <div class="col-md-6">
           <label class="form-label">Father's Name</label>
@@ -126,7 +124,7 @@
         </div>
         <div class="col-md-4">
           <label class="form-label">Blood Group</label>
-          <select name="bloodgroup" class="form-select form-select-lg">
+          <select name="bloodGroup" class="form-select form-select-lg">
             <option selected>- - s e l e c t - -</option>
             <option value="A+">A RhD positive (A+)</option>
             <option value="A-">A RhD negative (A-)</option>

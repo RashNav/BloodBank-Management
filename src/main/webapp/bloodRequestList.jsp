@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="project.ConnectionProvider" %>
+<%@ page import="dao.ConnectionProvider" %>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBM | COMPLETED</title>
+  <title>BBM | REQ</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
@@ -35,10 +35,10 @@
           <a class="nav-link" href="manageStock.jsp">Stocks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="requestForBlood.jsp">Requests</a>
+          <a class="nav-link active" aria-current="page" href="#">Requests</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Completed</a>
+          <a class="nav-link" href="requestApprovedList.jsp">Completed</a>
         </li>
 
       </ul>
@@ -56,11 +56,16 @@
   <div class="container-fluid" style="padding-left: 60px; padding-right: 60px;">
     <br>
     <h2 class="text-center" style="font-family: 'Roboto Mono', monospace;">
-      <small class="text-muted">Approved Requests</small>
+      <small class="text-muted">Requests for blood</small>
     </h2>
     <div class="text-success">
       <hr>
     </div>
+
+    <div class="container text-left" style="padding-left: 0px; margin-left: 0px;">
+      <a href="index.jsp" class="btn btn-danger">Add New Request</a>
+    </div>
+
     <br>
     <!-- Requests table -->
     <table class="table table-borderless table-hover">
@@ -70,6 +75,7 @@
         <th>Mobile Number</th>
         <th>Email</th>
         <th>Blood group</th>
+        <th>Controls</th>
       </tr>
       </thead>
       <tbody>
@@ -78,13 +84,18 @@
           try {
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM bloodrequest WHERE status='approved'");
+            ResultSet rs = st.executeQuery("SELECT * FROM bloodrequest WHERE status='pending'");
             while (rs.next()){
         %>
         <td><%=rs.getString(1)%></td>
         <td><%=rs.getString(2)%></td>
         <td><%=rs.getString(3)%></td>
         <td><%=rs.getString(4)%></td>
+        <td>
+          <a href="${pageContext.request.contextPath}/reqAcceptAction?mobileNumber=<%=rs.getString(2)%>">Accept</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="${pageContext.request.contextPath}/reqDeclineAction?mobileNumber=<%=rs.getString(2)%>">Decline</a>
+        </td>
       </tr>
       <%
           }

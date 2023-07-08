@@ -1,5 +1,5 @@
 <%@ page import="java.sql.Connection" %>
-<%@ page import="project.ConnectionProvider" %>
+<%@ page import="dao.ConnectionProvider" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -76,7 +76,7 @@
                     ResultSet rs = st.executeQuery("SELECT * FROM donor WHERE id = '"+id+"'");
                     while (rs.next()){
             %>
-            <form action="updateDonorAction.jsp" class="row g-3">
+            <form action="${pageContext.request.contextPath}/updateDonorAction" class="row g-3">
                 <input type="hidden" class="form-control form-control-lg" name="id" value="<%=id%>">
                 <div class="col-md-6">
                     <label class="form-label">Name</label>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Mobile</label>
-                    <input type="number" class="form-control form-control-lg" name="mobilenumber" value="<%=rs.getString(5)%>">
+                    <input type="number" class="form-control form-control-lg" name="mobileNumber" value="<%=rs.getString(5)%>">
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Father's Name</label>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="project.ConnectionProvider" %>
+<%@ page import="dao.ConnectionProvider" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,10 +36,10 @@
                     <a class="nav-link active" aria-current="page" href="#">Stocks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="requestForBlood.jsp">Requests</a>
+                    <a class="nav-link" href="bloodRequestList.jsp">Requests</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="requstCompleted.jsp">Completed</a>
+                    <a class="nav-link" href="requestApprovedList.jsp">Completed</a>
                 </li>
 
             </ul>
@@ -63,9 +63,9 @@
                 </p>
             </blockquote>
         </figure>
-        <form action="manageStockAction.jsp">
-            <label for="bloodGroup" class="form-label">Blood group </label>
-            <select name="bloodgroup" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <form action="${pageContext.request.contextPath}/manageStockAction">
+            <label class="form-label">Blood group </label>
+            <select name="bloodGroup" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 <option selected>- - s e l e c t - -</option>
                 <option value="A RhD positive (A+)">A RhD positive (A+)</option>
                 <option value="A RhD negative (A-)">A RhD negative (A-)</option>
@@ -77,17 +77,17 @@
                 <option value="AB RhD negative (AB-)">AB RhD negative (AB-)</option>
             </select>
 
-            <label for="action" class="form-label">Action </label>
+            <label class="form-label">Action </label>
             <div class="row">
                 <div class="col-md-2">
                 </div>
                 <div class=" col-md-4 form-check">
-                    <input class="form-check-input" type="radio" name="indec" value="increment" checked>
-                    <label class="form-check-label" for="increment">Increment</label>
+                    <input class="form-check-input" type="radio" name="state" value="increment" checked>
+                    <label class="form-check-label" >Increment</label>
                 </div>
                 <div class=" col-md-4 form-check">
-                    <input class="form-check-input" type="radio" name="indec" value="decrement" >
-                    <label class="form-check-label" for="decrement">Decrement</label>
+                    <input class="form-check-input" type="radio" name="state" value="decrement" >
+                    <label class="form-check-label" >Decrement</label>
                 </div>
                 <div class="col-md-2">
                 </div>
@@ -95,7 +95,7 @@
 
             <br>
 
-            <label for="units" class="form-label">Units </label>
+            <label class="form-label">Units </label>
             <input name="units" class="form-control form-control-lg" type="text" placeholder="How many units" aria-label="form-control-lg example"><br>
 
             <div class="d-grid col-8 mx-auto">
@@ -117,27 +117,27 @@
             </tr>
             </thead>
             <tbody>
-                <tr>
-                    <%
-                        try {
-                            Connection con = ConnectionProvider.getCon();
-                            Statement st = con.createStatement();
-                            ResultSet rs = st.executeQuery("SELECT * FROM stock");
-                            int i = 0;
-                            while (rs.next()){
-                                i=i+1;
+            <tr>
+                <%
+                    try {
+                        Connection con = ConnectionProvider.getCon();
+                        Statement st = con.createStatement();
+                        ResultSet rs = st.executeQuery("SELECT * FROM stock");
+                        int i = 0;
+                        while (rs.next()){
+                            i=i+1;
 
-                    %>
-                    <th scope="row"><%=i%></th>
-                    <td><%=rs.getString(1)%></td>
-                    <td><%=rs.getString(2)%></td>
-                </tr>
-                    <%
-                            }
-                        }catch (Exception e){
-                            System.out.println(e);
-                        }
-                    %>
+                %>
+                <th scope="row"><%=i%></th>
+                <td><%=rs.getString(1)%></td>
+                <td><%=rs.getString(2)%></td>
+            </tr>
+            <%
+                    }
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+            %>
             </tbody>
         </table>
     </div>

@@ -50,21 +50,21 @@
                 String msg = request.getParameter("msg");
                 if ("valid".equals(msg)){
             %>
-            <center>Form Submitted Successfully, YOu will be notified within 8 hours</center>
+            <div style="text-align: center;">Submitted Successfully !<br> You will be notified within 8 hours</div>
             <%
                 }
             %>
             <%
                 if ("invalid".equals(msg)){
             %>
-            <center>Invalid data! Try Again</center>
+            <div style="text-align: center;">Invalid data! Try Again</div>
             <%
                 }
             %>
             <figure class="text-center">
                 <blockquote class="blockquote">
                     <p class="fs-2">
-                        REQUEST TO DONATE
+                        REQUEST FOR BLOOD
                     </p>
                 </blockquote>
                 <figcaption class="blockquote-footer">
@@ -75,18 +75,18 @@
                 </figcaption>
             </figure>
 
-            <form action="indexFormAction.jsp">
+            <form action="${pageContext.request.contextPath}/indexAction">
                 <label class="form-label">Name: </label>
-                <input name="name" class="form-control form-control-lg" type="text" placeholder="Donor name" aria-label="form-control-lg example"><br>
+                <input name="name" class="form-control form-control-lg" type="text" placeholder="Requester name" aria-label="form-control-lg example"><br>
 
                 <label class="form-label">Mobile: </label>
-                <input name="mobilenumber" class="form-control form-control-lg" type="number" placeholder="Contact number" aria-label="form-control-lg example"><br>
+                <input name="mobileNumber" class="form-control form-control-lg" type="number" placeholder="Contact number" aria-label="form-control-lg example"><br>
 
                 <label class="form-label">Email: </label>
                 <input name="email" class="form-control form-control-lg" type="email" placeholder="Email address" aria-label="form-control-lg example"><br>
 
                 <label class="form-label">Blood group: </label>
-                <select name="bloodgroup" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <select name="bloodGroup" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                     <option selected>- - s e l e c t - -</option>
                     <option value="A+">A RhD positive (A+)</option>
                     <option value="A-">A RhD negative (A-)</option>
